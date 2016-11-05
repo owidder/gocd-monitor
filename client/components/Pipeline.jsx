@@ -7,6 +7,7 @@ import React from 'react';
 import { Card, CardHeader, CardText } from 'material-ui/Card';
 import * as Colors from 'material-ui/styles/colors';
 
+import * as img from './images';
 
 // Weather icon indicator
 const weatherIconStatuses = ['sunny', 'partlycloudy', 'cloudy', 'cloudy', 'pouring', 'lightning'];
@@ -159,6 +160,24 @@ export default class Pipeline extends React.Component {
         style = styles.cardSuccess;
         break;
     }
+
+    const renderAuthor = (author) => {
+      const image = img.images[author];
+
+      if(image != null) {
+        console.log("-> image for: " + author);
+        return (
+            <img src={'/assets/images/' + image} height='24'/>
+        )
+      }
+      else {
+        console.log("-> no image for: " + author);
+        return (
+            <i className="mdi mdi-worker mdi-24px"></i>
+        )
+      }
+    };
+
     return (
       <Card style={style} containerStyle={styles.cardContainer}>
         <CardHeader
@@ -167,7 +186,9 @@ export default class Pipeline extends React.Component {
           titleStyle={styles.cardTitle}
           subtitle={status}
           subtitleStyle={styles.cardSubTitle}>
-          <i className={'mdi-weather-' + this.weatherIcon(pipeline) + ' mdi mdi-48px buildstatus'}></i>
+          <a href={'http://localhost:8153/go/tab/pipeline/history/' + pipeline.name}>
+            <i className={'mdi-weather-' + this.weatherIcon(pipeline) + ' mdi mdi-48px buildstatus'}></i>
+          </a>
         </CardHeader>
         <CardText>
           <div className="buildinfo">
@@ -177,7 +198,7 @@ export default class Pipeline extends React.Component {
                 <span>{ pipeline.timeago }</span>
               </p>
               <p>
-                <i className="mdi mdi-worker mdi-24px"></i>
+                {renderAuthor(pipeline.author)}
                 <span>{status === 'paused' ? pipeline.pauseinfo.paused_by : pipeline.author}</span>
               </p>
             </div>

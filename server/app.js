@@ -25,13 +25,20 @@ app.set('views', path.join(__dirname, 'views'));
 if (devMode) {
   app.use('/assets/js', dev);
 }
+
+app.use('/assets/test/:name', (req, res, next) => {
+
+});
+
 app.use('/assets', express.static(path.join(__dirname, '../assets')));
+
 app.use('/', routes);
 
 // catch 404 and forward to error handler
 app.use((req, res, next) => {
   let err = new Error('Not Found');
   err.status = 404;
+  console.error("404");
   next(err);
 });
 

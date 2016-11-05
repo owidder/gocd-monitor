@@ -6,11 +6,11 @@ var config = {
     // Webpack dev port to run on
     devPort: 3001,
     // Url for your go server
-    goServerUrl: 'https://ci.example.com',
+    goServerUrl: 'http://localhost:8153',
     // Go user to use for communication with go server
-    goUser: 'xxx',
+    goUser: 'go',
     // Password for go user
-    goPassword: 'xxx',
+    goPassword: 'go',
     // How often data from go should be refreshed in seconds
     goPollingInterval: 30,
     // If > 0 switches between pipeline and test results page every n seconds
